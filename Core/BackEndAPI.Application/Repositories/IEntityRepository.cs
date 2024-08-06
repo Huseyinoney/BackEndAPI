@@ -10,6 +10,6 @@ namespace BackEndAPI.Application.Repositories
 {
     public interface IEntityRepository
     {
-        public Entity GetEntity(GetEntityDTO getEntityDTO);
+        public  Task<Entity> GetEntityAsync(GetEntityDTO getEntityDTO);
     }
 }

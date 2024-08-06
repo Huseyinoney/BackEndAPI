@@ -1,4 +1,8 @@
-﻿using BackEndAPI.Persistence.AppDbContext;
+﻿using BackEndAPI.Application.Repositories;
+using BackEndAPI.Application.Services;
+using BackEndAPI.Persistence.AppDbContext;
+using BackEndAPI.Persistence.Repositories;
+using BackEndAPI.Persistence.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +19,10 @@ namespace BackEndAPI.Persistence
         public static void AddPersistenceServices(this IServiceCollection services)
         {
             services.AddDbContext<EntityDbContext>(options => options.UseSqlServer("connection string will add here"));
+            services.AddScoped<IEntityService, EntityService>();
+            services.AddScoped<IEntityRepository,EntityRepository>();
+
+            
         }
     }
 }

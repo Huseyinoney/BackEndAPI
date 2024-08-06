@@ -1,20 +1,28 @@
 ﻿using BackEndAPI.Application.DTOs;
 using BackEndAPI.Application.Repositories;
 using BackEndAPI.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BackEndAPI.Persistence.AppDbContext;
+
 
 namespace BackEndAPI.Persistence.Repositories
 {
     public class EntityRepository : IEntityRepository
     {
-        public Entity GetEntity(GetEntityDTO getEntityDTO)
+        private readonly EntityDbContext _dbContext;
+
+        public EntityRepository(EntityDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+
+        public async Task<Entity> GetEntityAsync(GetEntityDTO getEntityDTO)
+        {
+            //mapper işlemi yapılacak getEntityDTO ->Entity (mapper kütüphanesi ile) 
+            Entity entity = new Entity
+            {
+                Name = getEntityDTO.Name
+            };
+                return await _dbContext.Entities.FindAsync(entity);
         }
     }
-
 }
