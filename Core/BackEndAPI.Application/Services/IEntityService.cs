@@ -10,6 +10,6 @@ namespace BackEndAPI.Application.Services
 {
     public interface IEntityService
     {
-        public  Task<Entity> GetEntityAsync(GetEntityDTO getEntityDTO);
+        public  Task<GetEntityResponseDTO> GetEntityAsync(GetEntityDTO getEntityDTO);
     }
 }

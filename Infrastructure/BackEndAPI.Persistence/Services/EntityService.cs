@@ -13,7 +13,7 @@ namespace BackEndAPI.Persistence.Services
         {
             _entityRepository = entityRepository;
         }
-        public async Task<Entity> GetEntityAsync(GetEntityDTO getEntityDTO)
+        public async Task<GetEntityResponseDTO> GetEntityAsync(GetEntityDTO getEntityDTO)
         {
             return await _entityRepository.GetEntityAsync(getEntityDTO);
         }

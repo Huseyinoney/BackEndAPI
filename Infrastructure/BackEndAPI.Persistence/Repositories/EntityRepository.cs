@@ -15,7 +15,7 @@ namespace BackEndAPI.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<Entity> GetEntityAsync(GetEntityDTO getEntityDTO)
+        public async Task<GetEntityResponseDTO> GetEntityAsync(GetEntityDTO getEntityDTO)
         {
             //mapper işlemi yapılacak getEntityDTO ->Entity (mapper kütüphanesi ile) 
             Entity entity = new Entity
