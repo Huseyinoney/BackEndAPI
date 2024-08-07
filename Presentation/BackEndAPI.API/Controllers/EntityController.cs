@@ -3,6 +3,7 @@ using BackEndAPI.Application.Services;
 using BackEndAPI.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 
 namespace BackEndAPI.API.Controllers
 {
@@ -21,7 +22,13 @@ namespace BackEndAPI.API.Controllers
         public async Task<IActionResult> GetEntity(GetEntityDTO getEntityDTO) 
         {
             GetEntityResponseDTO response = await entityService.GetEntityAsync(getEntityDTO);
+            if(response is not null)
+            {
+            Console.WriteLine(response);
             return Ok(response);
+
+            }
+            return StatusCode(400);
         }
 
     }
