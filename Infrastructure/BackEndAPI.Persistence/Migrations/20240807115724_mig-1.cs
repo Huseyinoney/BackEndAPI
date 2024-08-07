@@ -5,7 +5,7 @@
 namespace BackEndAPI.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class mig1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

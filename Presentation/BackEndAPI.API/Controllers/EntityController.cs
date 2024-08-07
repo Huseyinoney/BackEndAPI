@@ -20,7 +20,7 @@ namespace BackEndAPI.API.Controllers
         [HttpPost]
         public async Task<IActionResult> GetEntity(GetEntityDTO getEntityDTO) 
         {
-        Entity response = await entityService.GetEntityAsync(getEntityDTO);
+            GetEntityResponseDTO response = await entityService.GetEntityAsync(getEntityDTO);
             return Ok(response);
         }
 

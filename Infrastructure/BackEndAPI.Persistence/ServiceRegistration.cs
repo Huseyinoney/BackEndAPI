@@ -11,6 +11,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BackEndAPI.Persistence
 {
@@ -18,7 +19,7 @@ namespace BackEndAPI.Persistence
     {
         public static void AddPersistenceServices(this IServiceCollection services)
         {
-            services.AddDbContext<EntityDbContext>(options => options.UseSqlServer("connection string will add here"));
+            services.AddDbContext<EntityDbContext>(options => options.UseSqlServer("connection string"));
             services.AddScoped<IEntityService, EntityService>();
             services.AddScoped<IEntityRepository,EntityRepository>();
 
