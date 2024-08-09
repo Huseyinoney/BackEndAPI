@@ -19,16 +19,16 @@ namespace BackEndAPI.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetEntity(GetEntityDTO getEntityDTO) 
+        public async Task<IActionResult> GetEntity(GetEntityDTO getEntityDTO)
         {
             GetEntityResponseDTO response = await entityService.GetEntityAsync(getEntityDTO);
-            if(response is not null)
+            if (response is not null)
             {
-            Console.WriteLine(response);
-            return Ok(response);
+
+                return Ok(response);
 
             }
-            return StatusCode(400);
+            return NotFound();
         }
 
     }

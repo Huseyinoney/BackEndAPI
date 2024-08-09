@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace BackEndAPI.Domain.Entities
 {
-    public class Entity
+    public class User
     {
-        public  int Id { get; set; }
-        public required string Name { get; set; }
+        public string Id { get; set; }
+        public string UserName { get; set; }
+        public string password { get; set; }
+
     }
 }

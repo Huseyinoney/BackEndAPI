@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BackEndAPI.Application.DTOs;
+﻿using BackEndAPI.Application.DTOs;
 using BackEndAPI.Application.Repositories;
 using BackEndAPI.Domain.Entities;
 using BackEndAPI.Persistence.AppDbContext;
@@ -11,12 +10,12 @@ namespace BackEndAPI.Persistence.Repositories
     public class EntityRepository : IEntityRepository
     {
         private readonly EntityDbContext _dbContext;
-        private readonly IMapper _mapper;
+       
 
-        public EntityRepository(EntityDbContext dbContext, IMapper mapper)
+        public EntityRepository(EntityDbContext dbContext)
         {
             _dbContext = dbContext;
-            _mapper = mapper;
+            
         }
 
         public async Task<Entity> GetEntityAsync(GetEntityDTO getEntityDTO)

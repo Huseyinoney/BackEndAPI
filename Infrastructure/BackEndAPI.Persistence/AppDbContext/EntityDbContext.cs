@@ -14,5 +14,6 @@ namespace BackEndAPI.Persistence.AppDbContext
         {  
         }
         public DbSet<Entity> Entities { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
