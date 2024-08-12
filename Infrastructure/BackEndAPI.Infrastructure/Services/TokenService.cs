@@ -1,6 +1,7 @@
 ﻿using BackEndAPI.Application.DTOs;
 using BackEndAPI.Application.Services;
 using BackEndAPI.Domain.Entities;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -51,5 +52,43 @@ namespace BackEndAPI.Infrastructure.Services
             return token;
 
         }
+        public ClaimsPrincipal ValidateToken(string token)
+        {
+            JwtSecurityTokenHandler tokenHandler = new();
+            var securityKey = Encoding.UTF8.GetBytes(configuration["Token:SecurityKey"]);
+
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = configuration["Jwt:Issuer"],
+                ValidAudience = configuration["Jwt:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(securityKey)
+            };
+            try
+            {
+                var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+                
+                return principal;
+
+            }
+            catch 
+            {
+
+                return null;
+            }
+        }
+        public string GetUsernameFromToken(string token)
+        {
+            var principal = ValidateToken(token);
+            if (principal == null)
+                return null;
+
+            var usernameClaim = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+            return usernameClaim?.Value;
+        }
+
     }
 }
