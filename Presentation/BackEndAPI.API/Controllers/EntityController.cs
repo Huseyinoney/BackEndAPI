@@ -1,12 +1,14 @@
 ﻿using BackEndAPI.Application.DTOs;
 using BackEndAPI.Application.Services;
 using BackEndAPI.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata.Ecma335;
 
 namespace BackEndAPI.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EntityController : ControllerBase
