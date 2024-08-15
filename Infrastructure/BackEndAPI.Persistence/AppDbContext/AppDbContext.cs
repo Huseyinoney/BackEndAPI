@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BackEndAPI.Persistence.AppDbContext
 {
-    public class EntityDbContext : DbContext
+    public class AppDbContext : DbContext
     {
-        public EntityDbContext(DbContextOptions<EntityDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {  
         }
         public DbSet<Entity> Entities { get; set; }
