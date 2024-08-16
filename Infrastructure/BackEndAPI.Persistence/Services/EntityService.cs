@@ -5,6 +5,7 @@ using BackEndAPI.Application.Services;
 using BackEndAPI.Application.UnitOfWorks;
 using BackEndAPI.Domain.Entities;
 using BackEndAPI.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackEndAPI.Persistence.Services
 {
@@ -20,7 +21,7 @@ namespace BackEndAPI.Persistence.Services
         }
         public async Task<GetEntityResponseDTO> GetEntityAsync(GetEntityDTO getEntityDTO)
         {
-            Entity response = await unitOfWork.GetReadRepository<Entity>().GetAsync( x =>);
+            Entity response = await unitOfWork.GetReadRepository<Entity>().GetAsync(x => x.Name == getEntityDTO.Name).FirstOrDefaultAsync();
             GetEntityResponseDTO data = _mapper.Map<GetEntityResponseDTO>(response);
             return data;
         }

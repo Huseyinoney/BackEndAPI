@@ -2,6 +2,7 @@
 using BackEndAPI.Application.Repositories;
 using BackEndAPI.Domain.Entities;
 using BackEndAPI.Persistence.AppDbContext;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,8 @@ namespace BackEndAPI.Persistence.Repositories
         public  IQueryable<T> GetAsync(Expression<Func<T, bool>> predicate)
         {
 
-           return Table.Where(predicate);
+                var response =  Table.Where(predicate);
+            return response;
            
         }
     }
