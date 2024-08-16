@@ -22,6 +22,10 @@ namespace BackEndAPI.Persistence.Services
         public async Task<GetEntityResponseDTO> GetEntityAsync(GetEntityDTO getEntityDTO)
         {
             Entity response = await unitOfWork.GetReadRepository<Entity>().GetAsync(x => x.Name == getEntityDTO.Name).FirstOrDefaultAsync();
+            if (response == null)
+            {
+                return null;
+            }
             GetEntityResponseDTO data = _mapper.Map<GetEntityResponseDTO>(response);
             return data;
         }
