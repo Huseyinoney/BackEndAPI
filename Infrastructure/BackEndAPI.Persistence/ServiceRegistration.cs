@@ -1,9 +1,7 @@
 ﻿using BackEndAPI.Application.Repositories;
-using BackEndAPI.Application.Services;
 using BackEndAPI.Application.UnitOfWorks;
 using BackEndAPI.Persistence.AppDbContext;
 using BackEndAPI.Persistence.Repositories;
-using BackEndAPI.Persistence.Services;
 using BackEndAPI.Persistence.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,7 +22,6 @@ namespace BackEndAPI.Persistence
         public static void AddPersistenceServices(this IServiceCollection services,IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext.AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("sqlServer")));
-            services.AddScoped<IEntityService, EntityService>();
             //services.AddScoped<IEntityRepository, EntityRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();  
         }
