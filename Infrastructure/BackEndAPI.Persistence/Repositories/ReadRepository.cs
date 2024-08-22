@@ -1,4 +1,5 @@
-﻿using BackEndAPI.Application.DTOs;
+﻿using Azure;
+using BackEndAPI.Application.DTOs;
 using BackEndAPI.Application.Repositories;
 using BackEndAPI.Domain.Entities;
 using BackEndAPI.Persistence.AppDbContext;
@@ -22,14 +23,10 @@ namespace BackEndAPI.Persistence.Repositories
             _dbContext = dbContext;
         }
         private DbSet<T> Table { get => _dbContext.Set<T>(); }
-        
 
-        public  IQueryable<T> GetAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
         {
-
-                var response =  Table.Where(predicate);
-            return response;
-           
+            return  await Table.FirstOrDefaultAsync(predicate);
         }
     }
 }

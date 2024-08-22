@@ -1,10 +1,9 @@
 ﻿using BackEndAPI.Application.DTOs;
-using BackEndAPI.Application.Services;
+using BackEndAPI.Application.Features.EntityFeatures.Queries;
 using BackEndAPI.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
 
 namespace BackEndAPI.API.Controllers
 {
@@ -13,24 +12,17 @@ namespace BackEndAPI.API.Controllers
     [ApiController]
     public class EntityController : ControllerBase
     {
-        private readonly IEntityService entityService;
+        private readonly IMediator mediator;
 
-        public EntityController(IEntityService entityService)
+        public EntityController(IMediator mediator)
         {
-            this.entityService = entityService;
+            this.mediator = mediator;
         }
-
         [HttpPost]
-        public async Task<IActionResult> GetEntity(GetEntityDTO getEntityDTO)
+        public async Task<IActionResult> GetEntity(GetEntityQueryRequest GetEntityQueryRequest)
         {
-            GetEntityResponseDTO response = await entityService.GetEntityAsync(getEntityDTO);
-            if (response is not null)
-            {
-
-                return Ok(response);
-
-            }
-            return NotFound();
+          var response =  await mediator.Send(GetEntityQueryRequest);
+            return Ok(response);
         }
 
     }

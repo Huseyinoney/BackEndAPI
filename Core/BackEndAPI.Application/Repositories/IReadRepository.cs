@@ -11,6 +11,6 @@ namespace BackEndAPI.Application.Repositories
 {
     public interface IReadRepository<T> where T : class, new()
     {
-        public IQueryable<T> GetAsync(Expression<Func<T,bool>> predicate);
+        public Task<T> GetAsync(Expression<Func<T,bool>> predicate);
     }
 }

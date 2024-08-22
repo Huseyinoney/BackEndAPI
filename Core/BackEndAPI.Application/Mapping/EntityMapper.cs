@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BackEndAPI.Application.DTOs;
+using BackEndAPI.Application.Features.EntityFeatures.Queries;
 using BackEndAPI.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace BackEndAPI.Application.Mapping
             CreateMap<GetEntityResponseDTO, Entity>();
             CreateMap<GetEntityDTO,Entity>();
             CreateMap<Entity,GetEntityDTO>();
+            CreateMap<GetEntityQueryResponse,Entity>();
+            CreateMap<Entity, GetEntityQueryResponse>()
+                .ForMember(destination => destination.Name, operation => operation.MapFrom(source => source.Name));
 
         }
     }

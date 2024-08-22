@@ -8,6 +8,15 @@ namespace BackEndAPI.Domain.Entities
 {
     public class Entity
     {
+        public Entity()
+        {
+            
+        }
+        public Entity(int Id,string Name)
+        {
+            this.Id = Id;
+            this.Name = Name;
+        }
         public  int Id { get; set; }
         public  string Name { get; set; }
     }
