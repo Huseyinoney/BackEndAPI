@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BackEndAPI.Persistence.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(AppDbContext.AppDbContext))]
     [Migration("20240822131559_mig-4")]
     partial class mig4
     {
