@@ -15,4 +15,9 @@
     <ProjectReference Include="..\BackEndAPI.Domain\BackEndAPI.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\EntityFeatures\Command\" />
+    <Folder Include="Features\UserFeatures\Command\" />
+  </ItemGroup>
+
 </Project>

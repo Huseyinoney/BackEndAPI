@@ -12,7 +12,7 @@ namespace BackEndAPI.Application.UnitOfWorks
         IReadRepository<T> GetReadRepository<T>() where T : class,new();
 
         IWriteRepository<T> GetWriteRepository<T>() where T : class,new();
-        Task SaveAsync();
+        Task<int> SaveAsync();
 
     }
 }

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BackEndAPI.Application.Features.EntityFeatures.Queries
+namespace BackEndAPI.Application.Features.UserFeatures.Query.GetUser
 {
-    public class GetEntityQueryRequest :IRequest<GetEntityQueryResponse>
+    public class GetUserQueryRequest :IRequest<GetUserQueryResponse>
     {
         public string Name { get; set; }
     }

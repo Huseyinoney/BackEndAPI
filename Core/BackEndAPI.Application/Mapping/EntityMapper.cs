@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BackEndAPI.Application.DTOs;
-using BackEndAPI.Application.Features.EntityFeatures.Queries;
+using BackEndAPI.Application.Features.EntityFeatures.Query.GetEntity;
 using BackEndAPI.Domain.Entities;
 using System;
 using System.Collections.Generic;

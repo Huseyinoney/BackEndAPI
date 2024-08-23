@@ -24,7 +24,7 @@ namespace BackEndAPI.Persistence.UnitOfWorks
 
         IWriteRepository<T> IUnitOfWork.GetWriteRepository<T>() => new WriteRepository<T>(_dbContext);
 
-        async Task IUnitOfWork.SaveAsync() => await _dbContext.SaveChangesAsync();
+        async Task<int> IUnitOfWork.SaveAsync() => await _dbContext.SaveChangesAsync();
         
     }
 }

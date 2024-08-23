@@ -1,5 +1,5 @@
 ﻿using BackEndAPI.Application.DTOs;
-using BackEndAPI.Application.Features.EntityFeatures.Queries;
+using BackEndAPI.Application.Features.EntityFeatures.Query.GetEntity;
 using BackEndAPI.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
