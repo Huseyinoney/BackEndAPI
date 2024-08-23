@@ -15,7 +15,9 @@ namespace BackEndAPI.Application
         {
             var assembly = Assembly.GetExecutingAssembly();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
-            
+            services.AddAutoMapper(Assembly.GetEntryAssembly());
+
+
         }
     }
 }
