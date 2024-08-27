@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <Folder Include="Features\EntityFeatures\Command\" />
-    <Folder Include="Features\UserFeatures\Command\" />
   </ItemGroup>
 
 </Project>

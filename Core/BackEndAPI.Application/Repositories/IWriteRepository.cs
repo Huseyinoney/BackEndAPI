@@ -8,5 +8,6 @@ namespace BackEndAPI.Application.Repositories
 {
     public interface IWriteRepository<T> where T : class, new()
     {
+        
     }
 }

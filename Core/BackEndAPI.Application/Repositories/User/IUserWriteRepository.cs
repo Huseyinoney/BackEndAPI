@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BackEndAPI.Application.DTOs;
+using BackEndAPI.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,6 @@ namespace BackEndAPI.Application.Repositories.User
 {
     public interface IUserWriteRepository :IWriteRepository<Domain.Entities.User>
     {
+        public Task<string> CreateAsync(UserRegisterDTO entity);
     }
 }

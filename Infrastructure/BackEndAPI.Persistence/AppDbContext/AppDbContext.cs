@@ -1,4 +1,5 @@
 ﻿using BackEndAPI.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BackEndAPI.Persistence.AppDbContext
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User,Role,string>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {  

@@ -26,4 +26,8 @@
     <ProjectReference Include="..\..\Core\BackEndAPI.Domain\BackEndAPI.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\User\" />
+  </ItemGroup>
+
 </Project>

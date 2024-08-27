@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AutoMapper;
+using BackEndAPI.Application.Mapping;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,10 @@ namespace BackEndAPI.Application
         {
             var assembly = Assembly.GetExecutingAssembly();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
-            services.AddAutoMapper(Assembly.GetEntryAssembly());
-
-
+           
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+           /* services.AddAutoMapper(typeof(UserMapper));
+            services.AddAutoMapper(typeof(EntityMapper));*/
         }
     }
 }

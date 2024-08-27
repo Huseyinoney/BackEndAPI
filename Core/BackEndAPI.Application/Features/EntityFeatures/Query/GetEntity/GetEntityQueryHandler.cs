@@ -5,6 +5,7 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,10 @@ namespace BackEndAPI.Application.Features.EntityFeatures.Query.GetEntity
         public async Task<GetEntityQueryResponse> Handle(GetEntityQueryRequest request, CancellationToken cancellationToken)
         {
             var entity = await unitOfWork.GetReadRepository<Entity>().GetAsync(x => x.Name == request.Name);
-
+            if(entity == null)
+            {
+                return null;    
+            }
             return mapper.Map<GetEntityQueryResponse>(entity);
 
         }
