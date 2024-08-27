@@ -4,12 +4,6 @@ using BackEndAPI.Application.UnitOfWorks;
 using BackEndAPI.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BackEndAPI.Application.Features.UserFeatures.Command.UserRegister
 {
@@ -17,26 +11,37 @@ namespace BackEndAPI.Application.Features.UserFeatures.Command.UserRegister
 
     {
         private readonly UserManager<User> _userManager;
-        private readonly IUnitOfWork unitOfWork;
         private IMapper Mapper;
 
-        public UserRegisterCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, UserManager<User> userManager)
+        public UserRegisterCommandHandler(IMapper mapper, UserManager<User> userManager)
         {
-            this.unitOfWork = unitOfWork;
+
             Mapper = mapper;
             _userManager = userManager;
         }
 
         public async Task<UserRegisterCommandResponse> Handle(UserRegisterCommandRequest request, CancellationToken cancellationToken)
         {
+            User user = await _userManager.FindByEmailAsync(request.Email);
+            if (user != null)
+            {
+                throw new UserCreateFailedException("Böyle Bir E-Posta Daha Önce Kullanılmış");
+            }
+            user = await _userManager.FindByNameAsync(request.UserName);
+
+            if (user != null)
+            {
+                throw new UserCreateFailedException("Bu Kullanıcı Adı Daha Önce Alınmış");
+            }
+
+
             User mappedUser = Mapper.Map<User>(request);
-            
             IdentityResult result = await _userManager.CreateAsync(mappedUser);
             if (result.Succeeded)
             {
                 return new()
                 {
-                   
+
                     Succeeded = true,
                     Message = "Kullanıcı Oluşturuldu."
                 };
