@@ -34,9 +34,11 @@ namespace BackEndAPI.Application.Features.UserFeatures.Command.UserRegister
                 throw new UserCreateFailedException("Bu Kullanıcı Adı Daha Önce Alınmış");
             }
 
+            user = Mapper.Map<User>(request);
+            var hashedPassword = _userManager.PasswordHasher.HashPassword(user, request.Password);
+            user.PasswordHash = hashedPassword;
 
-            User mappedUser = Mapper.Map<User>(request);
-            IdentityResult result = await _userManager.CreateAsync(mappedUser);
+            IdentityResult result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
                 return new()

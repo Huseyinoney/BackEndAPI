@@ -14,5 +14,7 @@ namespace BackEndAPI.Application.Services
         public Token CreateToken(User user);
         public ClaimsPrincipal ValidateToken(string token);
         public string GetUsernameFromToken(string token);
+
+        public string GetTokenFromHeader();
     }
 }

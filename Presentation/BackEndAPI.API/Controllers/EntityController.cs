@@ -18,12 +18,13 @@ namespace BackEndAPI.API.Controllers
         {
             this.mediator = mediator;
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> GetEntity(GetEntityQueryRequest GetEntityQueryRequest)
         {
-          var response =  await mediator.Send(GetEntityQueryRequest);
+            var response = await mediator.Send(GetEntityQueryRequest);
 
-            if (response == null)
+            if (response is null)
             {
                 return StatusCode(StatusCodes.Status404NotFound);
             }

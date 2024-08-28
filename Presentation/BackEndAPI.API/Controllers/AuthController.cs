@@ -1,4 +1,5 @@
 ﻿using BackEndAPI.Application.DTOs;
+using BackEndAPI.Application.Features.UserFeatures.Command.UserLogin;
 using BackEndAPI.Application.Features.UserFeatures.Command.UserRegister;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -19,8 +20,18 @@ namespace BackEndAPI.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> UserRegister(UserRegisterCommandRequest userRegisterCommandRequest)
         {
-           UserRegisterCommandResponse response = await mediator.Send(userRegisterCommandRequest);
+            UserRegisterCommandResponse response = await mediator.Send(userRegisterCommandRequest);
             return Ok(response);
         }
+
+        [HttpPost("login")]
+
+        public async Task<IActionResult> Login(UserLoginCommandRequest userLoginCommandRequest)
+        {
+          UserLoginCommandResponse response = await mediator.Send(userLoginCommandRequest);
+            return Ok(response);
+        }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BackEndAPI.Application.DTOs;
+using BackEndAPI.Application.Features.UserFeatures.Command.UserLogin;
 using BackEndAPI.Application.Features.UserFeatures.Command.UserRegister;
 using BackEndAPI.Domain.Entities;
 using System;
@@ -15,11 +16,13 @@ namespace BackEndAPI.Application.Mapping
         public UserMapper()
         {
             CreateMap<UserRegisterCommandRequest, User>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
+            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
-            .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
-           
-            CreateMap<User, UserRegisterCommandRequest>();
+            .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password)).ReverseMap();
+
+            CreateMap<Token, UserLoginCommandResponse>()
+                .ForPath(dest => dest.Token.AccessToken, opt => opt.MapFrom(src => src.AccessToken))
+                .ForPath(dest => dest.Token.Expiration, opt => opt.MapFrom(src => src.Expiration)).ReverseMap();
         }
     }
 }

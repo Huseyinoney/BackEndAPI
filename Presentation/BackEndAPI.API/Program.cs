@@ -1,5 +1,6 @@
 using BackEndAPI.Persistence;
 using BackEndAPI.Application;
+using BackEndAPI.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -12,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 //builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
