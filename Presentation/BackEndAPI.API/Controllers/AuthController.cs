@@ -1,7 +1,9 @@
 ﻿using BackEndAPI.Application.DTOs;
+using BackEndAPI.Application.Features.UserFeatures.Command.UserChangePassword;
 using BackEndAPI.Application.Features.UserFeatures.Command.UserLogin;
 using BackEndAPI.Application.Features.UserFeatures.Command.UserRegister;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +34,13 @@ namespace BackEndAPI.API.Controllers
             return Ok(response);
         }
 
+        //[Authorize]
+        [HttpPost("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(UserChangePasswordCommandRequest userChangePasswordCommandRequest) 
+        {
+           UserChangePasswordCommandResponse response = await mediator.Send(userChangePasswordCommandRequest);
+            return Ok(response);
+        }
 
     }
 }

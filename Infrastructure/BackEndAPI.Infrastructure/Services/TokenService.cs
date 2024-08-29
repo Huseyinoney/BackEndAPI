@@ -14,9 +14,9 @@ namespace BackEndAPI.Infrastructure.Services
 
     {
         private readonly IConfiguration configuration;
-        private readonly HttpContextAccessor httpContextAccessor;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public TokenService(IConfiguration configuration, HttpContextAccessor httpContextAccessor)
+        public TokenService(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             this.configuration = configuration;
             this.httpContextAccessor = httpContextAccessor;
@@ -52,13 +52,13 @@ namespace BackEndAPI.Infrastructure.Services
         public ClaimsPrincipal ValidateToken(string token)
         {
             JwtSecurityTokenHandler tokenHandler = new();
-            var securityKey = Encoding.UTF8.GetBytes(configuration["Token:SecurityKey"]);
+            var securityKey = Encoding.UTF8.GetBytes(configuration["Token:SecretKey"]);
 
             var validationParameters = new TokenValidationParameters
             {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = false,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = configuration["Jwt:Issuer"],
                 ValidAudience = configuration["Jwt:Audience"],
@@ -78,7 +78,7 @@ namespace BackEndAPI.Infrastructure.Services
         public string GetUsernameFromToken(string token)
         {
             var principal = ValidateToken(token);
-            if (principal == null)
+            if (principal is null)
                 return null;
 
             var usernameClaim = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
@@ -87,7 +87,9 @@ namespace BackEndAPI.Infrastructure.Services
 
         public string GetTokenFromHeader()
         {
-            var token = httpContextAccessor.HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            var token = httpContextAccessor.HttpContext.Request.Headers.Authorization.FirstOrDefault().Replace("Bearer ", string.Empty);
+
+            Console.WriteLine(token);
             return token;
         }
     }
