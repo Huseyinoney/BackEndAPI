@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Tensorflow;
+using Tensorflow.NumPy;
 
 namespace BackEndAPI.Application.Services
 {
     public interface IKerasEntity
     {
-        Task<string> FindEntityFromModelAsync(IFormFile image);
+        Tensor FindEntityFromModel(string imagePath);
+        NDArray LoadImage(string  imagePath);
+
+
     }
 }
