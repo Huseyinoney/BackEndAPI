@@ -16,6 +16,7 @@ namespace BackEndAPI.Infrastructure
         {
           services.AddScoped<ITokenService,TokenService>();
            services.AddHttpContextAccessor();
+            services.AddScoped<IKerasEntity,KerasEntity>();
         }
     }
 }

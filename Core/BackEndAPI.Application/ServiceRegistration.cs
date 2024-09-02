@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BackEndAPI.Application.Mapping;
+using BackEndAPI.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,9 @@ namespace BackEndAPI.Application
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
            
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-           /* services.AddAutoMapper(typeof(UserMapper));
-            services.AddAutoMapper(typeof(EntityMapper));*/
+            /* services.AddAutoMapper(typeof(UserMapper));
+             services.AddAutoMapper(typeof(EntityMapper));*/
+           
         }
     }
 }

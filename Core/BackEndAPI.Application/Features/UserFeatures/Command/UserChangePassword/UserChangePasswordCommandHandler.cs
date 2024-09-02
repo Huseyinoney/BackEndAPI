@@ -28,28 +28,35 @@ namespace BackEndAPI.Application.Features.UserFeatures.Command.UserChangePasswor
         public async Task<UserChangePasswordCommandResponse> Handle(UserChangePasswordCommandRequest request, CancellationToken cancellationToken)
         {
             string token = tokenService.GetTokenFromHeader();
-            if (token is  null) 
+            if (token is null)
             {
                 throw new UserChangePasswordFailedException("Token Bulunamadı");
             }
-          string UserName =  tokenService.GetUsernameFromToken(token);
-            Console.WriteLine(UserName);
-           User user = await userManager.FindByNameAsync(UserName);
+            string UserName = tokenService.GetUsernameFromToken(token);
+
+            User user = await userManager.FindByNameAsync(UserName);
             if (user is null)
             {
                 throw new UserChangePasswordFailedException("Kullanıcı Bulunamadı");
             }
-           var result= await userManager.ChangePasswordAsync(user,request.OldPassword,request.NewPassword);
-            if(result.Succeeded)
+
+            bool isOldPasswordSame = await userManager.CheckPasswordAsync(user, request.OldPassword);
+
+            if (isOldPasswordSame)
             {
-                return new()
+                var result = await userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
+                if (result.Succeeded)
                 {
-                    Message = result.ToString()
-                };
-                
+                    return new()
+                    {
+                        Message = result.ToString()
+                    };
+
+                }
+                throw new UserChangePasswordFailedException("Bir hata oluştu");
             }
-            throw new UserChangePasswordFailedException("Bir hata oluştu");
-            
+            throw new UserChangePasswordFailedException("Eski şifre Doğru Değil");
+
         }
     }
 }

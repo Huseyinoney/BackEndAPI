@@ -34,7 +34,7 @@ namespace BackEndAPI.API.Controllers
             return Ok(response);
         }
 
-        //[Authorize]
+        
         [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePassword(UserChangePasswordCommandRequest userChangePasswordCommandRequest) 
         {
