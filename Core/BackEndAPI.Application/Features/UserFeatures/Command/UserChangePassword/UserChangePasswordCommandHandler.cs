@@ -44,16 +44,21 @@ namespace BackEndAPI.Application.Features.UserFeatures.Command.UserChangePasswor
 
             if (isOldPasswordSame)
             {
-                var result = await userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
-                if (result.Succeeded)
+                if (request.NewPassword.Equals(request.NewPasswordConfirm))
                 {
-                    return new()
+                    var result = await userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
+                    if (result.Succeeded)
                     {
-                        Message = result.ToString()
-                    };
+                        return new()
+                        {
+                            Message = result.ToString()
+                        };
 
+                    }
+                    throw new UserChangePasswordFailedException("Bir hata oluştu");
                 }
-                throw new UserChangePasswordFailedException("Bir hata oluştu");
+                throw new UserChangePasswordFailedException("Yeni şifre ve Doğrulama Şifresi Aynı Değil");
+
             }
             throw new UserChangePasswordFailedException("Eski şifre Doğru Değil");
 

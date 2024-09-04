@@ -30,7 +30,6 @@ namespace BackEndAPI.Infrastructure.Services
             var result = model.predict(inputTensor);
             return result;
         }
-
         public NDArray LoadImage(string imagePath)
         {
             Bitmap bitmap = new Bitmap(imagePath);
@@ -39,7 +38,6 @@ namespace BackEndAPI.Infrastructure.Services
             int channel = 3;
 
             var array = np.zeros(new Shape(width, height, channel));
-
 
             for (int y = 0; y < height; y++)
             {

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 using System.Text;
 
@@ -49,19 +50,19 @@ namespace BackEndAPI.Infrastructure.Services
             token.AccessToken = tokenHandler.WriteToken(securityToken);
             return token;
         }
-        public ClaimsPrincipal ValidateToken(string token)
+        public ClaimsPrincipal? ValidateToken(string token)
         {
             JwtSecurityTokenHandler tokenHandler = new();
             var securityKey = Encoding.UTF8.GetBytes(configuration["Token:SecretKey"]);
 
             var validationParameters = new TokenValidationParameters
             {
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateLifetime = false,
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = configuration["Jwt:Issuer"],
-                ValidAudience = configuration["Jwt:Audience"],
+                ValidIssuer = configuration["Token:Issuer"],
+                ValidAudience = configuration["Token:Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(securityKey)
             };
             try
@@ -72,14 +73,15 @@ namespace BackEndAPI.Infrastructure.Services
             }
             catch
             {
+
                 return null;
             }
         }
         public string GetUsernameFromToken(string token)
         {
             var principal = ValidateToken(token);
-            if (principal is null)
-                return null;
+            if (principal is null) return  null;
+               
 
             var usernameClaim = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
             return usernameClaim?.Value;

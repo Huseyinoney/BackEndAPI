@@ -28,8 +28,9 @@ namespace BackEndAPI.Application.Features.EntityFeatures.Query.GetEntity
         public async Task<GetEntityQueryResponse> Handle(GetEntityQueryRequest request, CancellationToken cancellationToken)
         {
             //model will add here 
+            //kerasEntity.FindEntityFromModel("imagePathWillAddHere");
             var entity = await unitOfWork.GetReadRepository<Entity>().GetAsync(x => x.Name == request.Name);
-            if(entity == null)
+            if(entity is null)
             {
                 return null;    
             }
