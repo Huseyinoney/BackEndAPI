@@ -53,15 +53,12 @@ namespace BackEndAPI.Application.Features.UserFeatures.Command.UserChangePasswor
                         {
                             Message = result.ToString()
                         };
-
                     }
                     throw new UserChangePasswordFailedException("Bir hata oluştu");
                 }
                 throw new UserChangePasswordFailedException("Yeni şifre ve Doğrulama Şifresi Aynı Değil");
-
             }
             throw new UserChangePasswordFailedException("Eski şifre Doğru Değil");
-
         }
     }
 }

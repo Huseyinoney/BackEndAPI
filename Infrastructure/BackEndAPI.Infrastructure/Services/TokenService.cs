@@ -43,7 +43,6 @@ namespace BackEndAPI.Infrastructure.Services
                 {
                     new(ClaimTypes.Name, user.UserName),
                 }
-
                 );
 
             JwtSecurityTokenHandler tokenHandler = new();
@@ -68,20 +67,17 @@ namespace BackEndAPI.Infrastructure.Services
             try
             {
                 var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
-
                 return principal;
             }
             catch
             {
-
                 return null;
             }
         }
         public string GetUsernameFromToken(string token)
         {
             var principal = ValidateToken(token);
-            if (principal is null) return  null;
-               
+            if (principal is null) return null;
 
             var usernameClaim = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
             return usernameClaim?.Value;

@@ -1,16 +1,6 @@
-﻿using Azure;
-using BackEndAPI.Application.DTOs;
-using BackEndAPI.Application.Repositories;
-using BackEndAPI.Domain.Entities;
-using BackEndAPI.Persistence.AppDbContext;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using BackEndAPI.Application.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BackEndAPI.Persistence.Repositories
 {

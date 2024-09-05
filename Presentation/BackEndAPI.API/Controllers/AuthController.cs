@@ -1,10 +1,7 @@
-﻿using BackEndAPI.Application.DTOs;
-using BackEndAPI.Application.Features.UserFeatures.Command.UserChangePassword;
+﻿using BackEndAPI.Application.Features.UserFeatures.Command.UserChangePassword;
 using BackEndAPI.Application.Features.UserFeatures.Command.UserLogin;
 using BackEndAPI.Application.Features.UserFeatures.Command.UserRegister;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndAPI.API.Controllers

@@ -15,14 +15,13 @@ builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
 
-
 builder.Services.AddControllers();
 //builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    
+
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "EntityApi", Version = "v1", Description = "EntityApi Swagger Client" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
@@ -43,11 +42,9 @@ builder.Services.AddSwaggerGen(c =>
                     Type = ReferenceType.SecurityScheme,
                     Id = "Bearer"
                 }
-
             },
             Array.Empty<string>()
         }
-
     });
 });
 
@@ -65,14 +62,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidAudience = builder.Configuration["Token:Audience"],
         ValidIssuer = builder.Configuration["Token:Issuer"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Token:SecretKey"])),
-
-
-
     };
 });
-
-
-
 
 var app = builder.Build();
 
@@ -84,10 +75,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
