@@ -8,6 +8,6 @@ namespace BackEndAPI.Application.DTOs
 {
     public class GetEntityDTO
     {
-       public string Name {  get; set; }
+       public string Name { get; set; } = string.Empty;
     }
 }

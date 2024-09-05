@@ -13,12 +13,11 @@ namespace BackEndAPI.Domain.Entities
         {
             
         }
-        public Entity(int Id,string Name)
+        public Entity(Guid Id,string Name)
         {
             this.Id = Id;
             this.Name = Name;
         }
-        public  int Id { get; set; }
-        public  string Name { get; set; }
+        public  string Name { get; set; } = string.Empty;
     }
 }

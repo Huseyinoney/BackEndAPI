@@ -10,8 +10,6 @@ namespace BackEndAPI.Domain.Entities
 {
     public class User :IdentityUser
     {
-       
-        
 
     }
 }

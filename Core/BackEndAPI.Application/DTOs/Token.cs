@@ -8,7 +8,7 @@ namespace BackEndAPI.Application.DTOs
 {
     public class Token
     {
-       public string AccessToken { get; set; }
+       public string AccessToken { get; set; } = string.Empty;
        public  DateTime Expiration { get; set; }
     }
 }
